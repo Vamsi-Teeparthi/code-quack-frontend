@@ -1,0 +1,54 @@
+.auth-header-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem 0;
+
+    .main-header {
+        font-weight: 500;
+        font-size: 1.5rem;
+        color: #ececec;
+    }
+
+    .sub-header {
+        font-weight: 200;
+        font-size: 1rem;
+        color: #ececec;
+    }
+}
+
+.auth-footer {
+    color: #ececec;
+    font-weight: 100;
+    font-size: 0.9rem;
+    margin: 0 auto 1rem auto;
+
+    .auth-footer-link {
+        color: #517fea;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: underline;
+
+        &:hover {
+            color: #1d48aa;
+        }
+    }
+}
+
+
+.error-messages-wrapper{
+    min-width: 400px;
+    max-width: 70%;
+    background-color: #ea9494;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .close-error{
+        cursor: pointer;
+    }
+}

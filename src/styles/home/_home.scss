@@ -1,0 +1,42 @@
+.home-screen-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem 0;
+
+    .home-header{
+        font-size: 1.2rem;
+    }
+
+    .videos-list-wrapper{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1.5rem;
+        position: relative;
+        .each-videos-list-wrapper{
+            min-width: 20rem;
+            max-width: 25rem;
+            min-height: 5rem;
+            padding: 1rem;
+            background-color: #000000;
+            border-radius: 0.5rem;
+            box-shadow: 1px 1px 10px rgba(219, 219, 219, 0.394);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem 0;
+
+            .programming-language{
+                font-size: 1.3rem;
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+                gap: 0 0.5rem;
+            }
+            .short-description{
+                font-size: 0.9rem;
+                color: #c9c9c9;
+            }
+        }
+    }
+}
