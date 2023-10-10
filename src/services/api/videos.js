@@ -17,6 +17,24 @@ export const getVideos = async () => {
         });
 };
 
+
+
+/**
+ * calling login api to log the user
+ */
+export const searchVideos = async ({searchQuery}) => {
+    let url = `/auth/videos/search/videos/?searchQuery=${searchQuery}`;
+    return await httpGET(url)
+        .then((res) => {
+            return Promise.resolve(res);
+        })
+        .catch(async (err) => {
+            console.log(err)
+            return Promise.reject(err?.response);
+        });
+};
+
+
 /**
  * calling login api to log the user
  */

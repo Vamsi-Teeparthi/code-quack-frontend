@@ -11,11 +11,11 @@ const EachVideoList = ({ key, data }) => {
         </div>
     )
 }
-const VideosList = ({ videos, loading }) => {
+const VideosList = ({ isSearching, videos, loading }) => {
     return (
         <div className='videos-list-wrapper'>
-            {loading ? <div className='loading-wrapper'>Loading ...</div> :
-                (videos && videos?.length === 0) ? <div className='loading-wrapper'>No videos to display</div> : <>
+            {loading ?  <div className='loading-wrapper'>{isSearching ? "Loading Search Results ..." : "Loading ..."}</div> :
+                (videos && videos?.length === 0) ? <div className='loading-wrapper'>{isSearching ? "Zero results found" : "No videos to display"}</div> : <>
                     {videos?.map((eachData) => (
                         <EachVideoList key={eachData?._id} data={eachData} />
 
