@@ -52,6 +52,9 @@ body{
         border: 1px solid #ffffffa5;
         
     }
+    option{
+        background-color: black;
+    }
 }
 
 .code-quack-main-text-area{
@@ -88,3 +91,7 @@ body{
 @import "./home/home";
 @import "./video_requesting";
 @import "./upload";
+@import "./video_screen";
+@import "./quiz_screen";
+@import "./requests_page";
+@import "./profile_screen";

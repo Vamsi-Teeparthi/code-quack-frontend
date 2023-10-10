@@ -1,4 +1,4 @@
-import { httpPOST } from "../axios/axiosInstance";
+import { httpGET, httpPOST } from "../axios/axiosInstance";
 
 
 /**
@@ -7,6 +7,19 @@ import { httpPOST } from "../axios/axiosInstance";
 export const requestVideos = async ({ data }) => {
     let url = `/auth/request/admin`;
     return await httpPOST(url, data)
+        .then((res) => {
+            return Promise.resolve(res);
+        })
+        .catch(async (err) => {
+            return Promise.reject(err?.response);
+        });
+};
+
+
+
+export const getRequests = async () => {
+    let url = `/auth/request/admin`;
+    return await httpGET(url)
         .then((res) => {
             return Promise.resolve(res);
         })

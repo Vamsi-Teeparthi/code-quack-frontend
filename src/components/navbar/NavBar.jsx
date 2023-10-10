@@ -48,14 +48,16 @@ const NavBar = () => {
                     </>}
                 {token ?
                     <>
-                        <span onClick={() => {setProfile(false);setNotificationOpen(!notificationOpen);}} className="each-menu-item"><Notifications />
-                            {notificationOpen &&
-                                <NotificationDropDown />
-                            }
-                        </span>
-                        <span onClick={() => {setProfile(!profile); setNotificationOpen(false)}} className="each-menu-item"><AccountCircle />
+                        {role === "user" &&
+                            <span onClick={() => { setProfile(false); setNotificationOpen(!notificationOpen); }} className="each-menu-item"><Notifications />
+                                {notificationOpen &&
+                                    <NotificationDropDown />
+                                }
+                            </span>
+                        }
+                        <span onClick={() => { setProfile(!profile); setNotificationOpen(false) }} className="each-menu-item"><AccountCircle />
                             {profile &&
-                                <ProfileDropDown setProfile={setProfile} />
+                                <ProfileDropDown role={role} setProfile={setProfile} />
                             }
                         </span>
                     </>

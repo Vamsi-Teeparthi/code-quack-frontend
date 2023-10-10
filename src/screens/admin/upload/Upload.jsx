@@ -59,11 +59,11 @@ const Upload = () => {
     } else if (videoData?.url?.length < 15) {
       setError("Please check the url once. It seems incorrect");
       return false
-    } else if (videoData?.shortDescription?.length < 20 || videoData?.shortDescription?.length > 100) {
-      setError("Short description must contains at least 20 characters and max 100 characters");
+    } else if (videoData?.shortDescription?.length < 20 || videoData?.shortDescription?.length > 500) {
+      setError("Short description must contains at least 20 characters and max 500 characters");
       return false
-    } else if (videoData?.longDescription?.length < 50 || videoData?.longDescription?.length > 200) {
-      setError("Long description must contains at least 50 characters and max 200 characters");
+    } else if (videoData?.longDescription?.length < 50 || videoData?.longDescription?.length > 1000) {
+      setError("Long description must contains at least 50 characters and max 1000 characters");
       return false
     }
     return true

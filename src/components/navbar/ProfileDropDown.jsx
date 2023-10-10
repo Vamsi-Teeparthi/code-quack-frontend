@@ -3,17 +3,19 @@ import Cookies from 'js-cookie'
 import React from 'react'
 import { useNavigate } from 'react-router'
 
-const ProfileDropDown = ({setProfile}) => {
-    const navigate = useNavigate()
-    const logoutHandler = () => {
-        Cookies.remove("token")
-        navigate("/login")
-        setProfile(false)
-    }
+const ProfileDropDown = ({ setProfile, role }) => {
+  const navigate = useNavigate()
+  const logoutHandler = () => {
+    Cookies.remove("token")
+    navigate("/login")
+    setProfile(false)
+  }
   return (
     <div className='profile-drop-down'>
-        <span onClick={() => navigate()} className="each-link"><Person/> Profile</span>
-        <span onClick={() => {logoutHandler()}} className="each-link"><Logout/> Logout</span>
+      {role === "user" &&
+        <span onClick={() => navigate("/profile")} className="each-link"><Person /> Profile</span>
+      }
+      <span onClick={() => { logoutHandler() }} className="each-link"><Logout /> Logout</span>
     </div>
   )
 }

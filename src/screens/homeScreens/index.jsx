@@ -12,6 +12,8 @@ const HomeScreens = () => {
     getVideos()
       .then((res) => {
         setVideos(res?.data?.videos)
+      }).catch( (err) => {
+        console.log(err)
       }).finally(() => {
         setLoading(false)
       })

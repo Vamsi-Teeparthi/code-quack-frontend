@@ -85,3 +85,27 @@ export const httpGET = (url, data) => {
             })
     })
 }
+
+
+export const httpPUT = (url, data) => {
+    return new Promise((resolve, reject) => {
+        instance.put(url, data)
+            .then((res) => {
+                resolve(res)
+            })
+            .catch((err) => {
+                if (axios.isAxiosError(err)) {
+                    if (err?.code === "ERR_NETWORK") {
+                        // toasts.info("Sorry for the inconvenience, the server is currently not responding. Please try again later.");
+                        err.response.data = {
+                            message: "Sorry for the inconvenience, the server is currently not responding. Please try again later."
+                        }
+                    }
+                    reject(err)
+
+                } else {
+                    reject(err)
+                }
+            })
+    })
+}

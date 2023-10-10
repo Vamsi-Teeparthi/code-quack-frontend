@@ -1,8 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { getNotifications } from '../../services/api/videos';
+import { timeFormat } from '../../utils/timeFormat';
 
 const NotificationDropDown = () => {
-  const [notifications, setNotifications] = useState(["ss", "dsfsd", "sdffdf"]);
+  const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const fetchNotificationsHandler = () => {
+    setLoading(true)
+    getNotifications()
+    .then( (res) => {
+       setNotifications(res?.data?.notifications)
+    }).catch( (err) => {
+
+    }).finally( () => {
+      setLoading(false)
+    })
+  }
+
+  useEffect( () => {
+    fetchNotificationsHandler()
+  }, [])
   return (
     <div className='profile-drop-down notification-drop-down'>
       <div className="notification-header-wrap">
@@ -14,10 +32,10 @@ const NotificationDropDown = () => {
             notifications?.map((each) => (
               <div className="each-notification">
                 <div className="title-date">
-                  <span className="title">Title Name</span>
-                  <span className="date">Tue, 12:30 pm</span>
+                  <span className="title">{each?.title}</span>
+                  <span className="date">{timeFormat(each?.createdAt)}</span>
                 </div>
-                <div className="description">New java programming language is uploaded. Please go to home page to check the video</div>
+                <div className="description">{each?.message}</div>
               </div>
             ))
 

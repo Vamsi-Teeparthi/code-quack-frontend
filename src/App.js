@@ -11,6 +11,9 @@ import FavoriteScreens from "./screens/favoriteScreens";
 import ProfileScreens from "./screens/profileScreens";
 import Videos from "./screens/admin/videos/Videos";
 import Upload from "./screens/admin/upload/Upload";
+import VideoScreen from "./screens/VideoScreen";
+import QuizScreen from "./screens/QuizScreen";
+import Requests from "./screens/admin/requests/Requests";
 
 function App() {
   return (
@@ -20,12 +23,17 @@ function App() {
         <Routes>
           <Route path="/" exact element={<AuthRoutes Component={HomeScreens} />} />
           <Route path="/request" exact element={<AuthRoutes Component={RequestVideosScreens} />} />
+          <Route path="/profile" exact element={<AuthRoutes Component={ProfileScreens} />} />
           <Route path="/feedback" exact element={<AuthRoutes Component={FeedBackScreens} />} />
           <Route path="/favorites" exact element={<AuthRoutes Component={FavoriteScreens} />} />
           <Route path="/profile" exact element={<AuthRoutes Component={ProfileScreens} />} />
+          <Route path="/video/:videoID" exact element={<AuthRoutes Component={VideoScreen} />} />
+          <Route path="/quiz/:videoID" exact element={<AuthRoutes Component={QuizScreen} />} />
+
           {/* ---- admin routes ------ */}
           <Route path="/videos" exact element={<AuthRoutes Component={Videos} />} />
           <Route path="/upload" exact element={<AuthRoutes Component={Upload} />} />
+          <Route path="/requests" exact element={<AuthRoutes Component={Requests} />} />
           <Route path="/login" exact element={<AuthScreens />} />
 
           {/* <Route path="*" element={<PageNotFound />} /> */}
