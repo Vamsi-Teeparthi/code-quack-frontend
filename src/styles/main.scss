@@ -6,6 +6,44 @@ body{
     background-color: #141414;
 }
 
+.App{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.global-message{
+    position: absolute;
+    min-width: 20rem;
+    max-width: 40rem;
+    padding: 0.8rem 1rem;
+    border-radius:  0.5rem;
+    background-color: #77e382;
+    z-index: 10000;
+    transition: all 0.5s ease;
+    left: 50%;
+    bottom: -5rem;
+    transform: translateX(-50%);
+
+    display: flex;
+    justify-content: space-between;
+    gap: 0 1rem;
+    svg{
+        cursor: pointer;
+    }
+
+}
+
+.global-message.active{
+    bottom: 2rem;
+}
+
+.inside-wrap{
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+}
 
 .main-content-page{
     position: relative;

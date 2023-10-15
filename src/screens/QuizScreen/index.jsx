@@ -10,7 +10,7 @@ const QuizScreen = () => {
     const [loading, setLoading] = useState(true);
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [answers, setAnswers] = useState([])
-    const [time, setTime] = useState(15);
+    const [time, setTime] = useState(30);
     const [disableScreen, setDisableScreen] = useState(false);
     const [currentQuestionAnswer, setCurrentQuestionAnswer] = useState("");
     const [answersRevealed, setAnswersRevealed] = useState({})
@@ -63,7 +63,7 @@ const QuizScreen = () => {
                 updatedAnswers.push(currentQuestionAnswer ? currentQuestionAnswer : "not answered")
                 setAnswers(updatedAnswers)
                 setCurrentQuestion(currentQuestion + 1);
-                setTime(15)
+                setTime(30)
                 setCurrentQuestionAnswer("")
                 setDisableScreen(false)
             }
@@ -103,7 +103,7 @@ const QuizScreen = () => {
                 disableScreen ? <div className='disable-screen'> Time over for this question.Loading next Question</div> :
                     <>
                         <Quiz setCurrentQuestionAnswer={setCurrentQuestionAnswer} currentQuestionAnswer={currentQuestionAnswer} quizData={quizData} time={time} currentQuestion={currentQuestion} />
-                        <button onClick={() => { setDisableScreen(true); nextQuestionHandler() }} className="code-quack-main-button">{currentQuestion === quizData?.length ? "Submit" : "Next"}</button>
+                        <button disabled={currentQuestionAnswer?.length === 0} onClick={() => { setDisableScreen(true); nextQuestionHandler() }} className="code-quack-main-button">{currentQuestion === quizData?.length ? "Submit" : "Next"}</button>
                     </>
 
             }

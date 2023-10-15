@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Header from './Header'
 import { signup } from '../../../services/api/auth'
 import { Check } from '@mui/icons-material'
+import { appContext } from '../../../services/appContext'
 
 const Signup = ({ setError, setAuthScreen }) => {
+  const {setGlobalMessage, setOpenGlobalMessage} = useContext(appContext)
   const [signupData, setSignupData] = useState({
     "name": "",
     "username": "",
@@ -42,11 +44,11 @@ const Signup = ({ setError, setAuthScreen }) => {
     } else if (!signupData?.confirmPassword) {
       setError("Please Enter Confirm Password")
       return false
-    } else if (!/^[A-Za-z\- ]{3,}$/.test(signupData?.name)) {
-      setError("Please enter only alphabets in name field and minimum three letters required.")
+    } else if (!/^[A-Za-z\- ]{3,50}$/.test(signupData?.name)) {
+      setError("Please enter only alphabets in name field and minimum 3 and max 50 letters required.")
       return false
-    } else if (!/^[A-Za-z][A-Za-z0-9]{5,}$/.test(signupData?.username)) {
-      setError("Username is not valid. It must start with an alphabet, contain only alphabets and numbers, and have a minimum length of 6 characters.")
+    } else if (!/^[A-Za-z][A-Za-z0-9]{6,15}$/.test(signupData?.username)) {
+      setError("Username is not valid. It must start with an alphabet, contain only alphabets and numbers, and have a minimum 6 and max 15 characters.")
       return false
     } else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(signupData?.email)) {
       setError("Invalid email address. Please enter a valid email address.")
@@ -77,6 +79,8 @@ const Signup = ({ setError, setAuthScreen }) => {
       }
       signup({ data })
         .then((res) => {
+          setOpenGlobalMessage(true)
+          setGlobalMessage(res?.data?.message)
           setAuthScreen("sign-in")
         }).catch((err) => {
           setError(err?.data?.message)

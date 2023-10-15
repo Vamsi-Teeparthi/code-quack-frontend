@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import LanguageDataForm from './components/LanguageDataForm'
 import QuizDataForm from './components/QuizDataForm'
 import ErrorMessages from '../../../components/ErrorMessages';
 import { uploadVideos } from '../../../services/api/videos';
 import { useNavigate } from 'react-router';
+import { appContext } from '../../../services/appContext';
 
 const Upload = () => {
+  const {setGlobalMessage, setOpenGlobalMessage} = useContext(appContext)
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [videoData, setVideoData] = useState({
@@ -136,6 +138,8 @@ const Upload = () => {
       }
       uploadVideos({ data })
         .then((res) => {
+          setOpenGlobalMessage(true)
+          setGlobalMessage(res?.data?.message)
           navigate("/videos")
         }).catch((err) => {
           setError(err?.data?.message)

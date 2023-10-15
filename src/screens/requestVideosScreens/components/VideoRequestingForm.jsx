@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router';
 import jwt_decode from "jwt-decode";
 import Header from '../../../components/Header';
 import { requestVideos } from '../../../services/api/request';
 import ErrorMessages from '../../../components/ErrorMessages';
+import { appContext } from '../../../services/appContext';
 
 const VideoRequestingForm = () => {
+    const {setGlobalMessage, setOpenGlobalMessage} = useContext(appContext)
     const [requestingData, setRequestingData] = useState({
         "language": "",
         "message": ""
@@ -51,6 +53,8 @@ const VideoRequestingForm = () => {
             }
             requestVideos({ data })
                 .then((res) => {
+                    setOpenGlobalMessage(true)
+                    setGlobalMessage(res?.data?.message)
                     navigate("/")
                 }).catch((err) => {
                     setError(err?.data?.message)

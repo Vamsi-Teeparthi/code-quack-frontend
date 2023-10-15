@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Header from './Header'
 import { login } from '../../../services/api/auth'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router';
 import jwt_decode from "jwt-decode";
+import { appContext } from '../../../services/appContext';
 
 const SignIn = ({ setError }) => {
+
+  const {setGlobalMessage, setOpenGlobalMessage} = useContext(appContext)
   const [loginData, setLoginData] = useState({
     "username": "",
     "password": ""
@@ -45,6 +48,8 @@ const SignIn = ({ setError }) => {
         .then((res) => {
           Cookies.set("token", res?.data?.token)
           const decoded = jwt_decode(res?.data?.token);
+          setOpenGlobalMessage(true)
+          setGlobalMessage("Successfully logged in.")
           if (decoded?.role === "admin") {
             navigate("/videos")
           }else{

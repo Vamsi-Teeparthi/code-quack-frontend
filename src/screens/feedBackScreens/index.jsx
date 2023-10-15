@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Header from '../../components/Header'
 import { submitFeedback } from '../../services/api/auth'
 import ErrorMessages from '../../components/ErrorMessages'
 import { useNavigate } from 'react-router'
+import { appContext } from '../../services/appContext'
 
 const FeedBackScreens = () => {
+  const {setGlobalMessage, setOpenGlobalMessage} = useContext(appContext)
   const [error, setError] = useState("")
   const [feedbackData, setFeedbackData] = useState({
     "rating": 1,
@@ -64,6 +66,8 @@ const FeedBackScreens = () => {
       }
       submitFeedback({ data })
         .then((res) => {
+          setOpenGlobalMessage(true)
+          setGlobalMessage(res?.data?.message)
           navigate("/")
         }).catch((err) => {
           setError(err?.data?.message)
