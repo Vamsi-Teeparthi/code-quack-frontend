@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import ErrorMessages from '../../../components/ErrorMessages'
 import Header from '../../../components/Header'
 import { login, resetPassword } from '../../../services/api/auth'
 import { useNavigate } from 'react-router'
 import Cookies from 'js-cookie'
+import { appContext } from '../../../services/appContext'
 
 const ResetPassword = () => {
+    const { setGlobalMessage, setOpenGlobalMessage } = useContext(appContext)
     const [error, setError] = useState("")
     const [resetData, setResetData] = useState({
         "oldPassword": "",
         "newPassword": "",
         "confirmNewPassword": "",
-    }) 
+    })
 
     const [loading, setLoading] = useState(false)
 
@@ -34,9 +36,9 @@ const ResetPassword = () => {
             setError("New Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.")
             return false
         } else if (resetData?.newPassword === resetData?.oldPassword) {
-            setError("New password and Old password are same. Please change new change password")
+            setError("New password and Old password are same. Please change new password")
             return false
-        }else if (resetData?.newPassword !== resetData?.confirmNewPassword) {
+        } else if (resetData?.newPassword !== resetData?.confirmNewPassword) {
             setError("Confirm new password is not same. Please verify")
             return false
         } else {
@@ -55,8 +57,10 @@ const ResetPassword = () => {
                 "newPassword": resetData?.newPassword
             }
             resetPassword({ data })
-                .then(() => {
-                    Cookies.remove("token") 
+                .then((res) => {
+                    setOpenGlobalMessage(true)
+                    setGlobalMessage(res?.data?.message)
+                    Cookies.remove("token")
                     navigate("/login")
                 }).catch((err) => {
                     setError(err?.data?.message)
